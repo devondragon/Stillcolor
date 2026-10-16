@@ -2,7 +2,7 @@
 
 # Stillcolor for macOS
 <img src="https://github.com/aiaf/Stillcolor/assets/119462/26f4fe39-44bb-436d-9348-fc5ba9e8dfde" align=left width=256>
-Save your eyesight and disable temporal dithering on your Mac with Stillcolor, a lightweight menu bar app for macOS running on Apple M1/M2/M3.  
+Save your eyesight and disable temporal dithering on your Mac with Stillcolor, a lightweight menu bar app for macOS running on Apple M1/M2/M3/M4.  
 
 * * *
 
@@ -34,8 +34,8 @@ See this timeblend video of how your screen looks like with temporal dithering v
 [https://www.youtube.com/watch?v=D9AZqJH-U-U](https://www.youtube.com/watch?v=D9AZqJH-U-U) 
 
 ## Requirements
-- Apple silicon Mac e.g. M1/M2/M3
-- macOS >= 13
+- Apple silicon Mac e.g. M1/M2/M3/M4
+- macOS >= 13 (tested through macOS 27)
 
 ## Installation
 Head over to [Releases](https://github.com/aiaf/Stillcolor/releases) and download the latest zip.
@@ -53,6 +53,8 @@ To check wether the app did the job, run the following in Terminal:
 Should see 1 or more `”enableDither” = No` corresponding to each live or past display.
 
 To re-enable dithering simply uncheck “Disable Dithering.”
+
+To keep dithering on the built-in display and disable it only on external monitors, check “External Displays Only.” The setting is reapplied whenever a display is connected or disconnected.
 
 `enableDither` is reset back to `Yes` on computer restart that's why you need to launch this app on login.
 
