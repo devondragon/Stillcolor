@@ -8,20 +8,31 @@
 import SwiftUI
 import LaunchAtLogin
 
+class AppDelegate: NSObject, NSApplicationDelegate {
+    private let detector = ScreenDetector()
+
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        detector.addObservers()
+        Stillcolor.applySavedPreferences()
+    }
+
+    func applicationWillTerminate(_ notification: Notification) {
+        detector.removeObservers()
+    }
+}
+
 @main
 struct StillcolorApp: App {
-    @AppStorage("disableDithering") var disableDithering: Bool = true
-    @AppStorage("ditherExternalOnly") var ditherExternalOnly: Bool = false
-    @AppStorage("disableUniformity2D") var disableUniformity2D: Bool = false
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-    var detector = ScreenDetector();
+    @AppStorage(PreferenceKey.disableDithering) var disableDithering: Bool = true
+    @AppStorage(PreferenceKey.ditherExternalOnly) var ditherExternalOnly: Bool = false
+    @AppStorage(PreferenceKey.disableUniformity2D) var disableUniformity2D: Bool = false
 
     init() {
-        detector.addObervers()
-        Stillcolor.enableDisableDithering(disableDithering, externalOnly: ditherExternalOnly)
-        Stillcolor.enableDisableUniformity2D(disableUniformity2D)
+        PreferenceKey.registerDefaults()
     }
-    
+
     var body: some Scene {
         MenuBarExtra(
             "Stillcolor",
@@ -53,7 +64,7 @@ struct StillcolorApp: App {
                     Stillcolor.enableDisableUniformity2D(disableUniformity2D)
                 }
             ))
-            
+
             Label {
                 Text("(Experimental) Stop built-in display from\nusing lower brightness levels around the edges")
                     .font(.caption)
@@ -62,7 +73,7 @@ struct StillcolorApp: App {
                     .multilineTextAlignment(.leading)
             } icon: {
             }
-            
+
             Divider()
             LaunchAtLogin.Toggle()
             Divider()
