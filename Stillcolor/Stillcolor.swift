@@ -33,6 +33,7 @@ class Stillcolor {
          
             Not sure of the exact history but M2 MacBook Air and M2 Mac mini use AppleCLCD2 (so do M1 counterparts, probably)
             While an M3 Max MBP for example uses IOMobileFramebufferShim.
+            M4 Max MBP (macOS 27) also uses IOMobileFramebufferShim.
             Can IOMobileFramebufferShim indicate a higher-end screen with certain attributes like PWM? Need to investigate.
          */
         let ret = IOServiceGetMatchingServices(kIOMainPortDefault, IOServiceMatching("IOMobileFramebufferAP"), &iterator)
