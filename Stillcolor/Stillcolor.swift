@@ -88,7 +88,18 @@ class Stillcolor {
         }
     }
 
-    static func enableDisableDithering(_ disable: Bool) {
+    static func enableDisableDithering(_ disable: Bool, externalOnly: Bool = false) {
+        if disable && externalOnly {
+            // Restore dithering on the built-in display in case it was disabled earlier
+            setPropertiesOnDisplayDriver([
+                "enableDither": kCFBooleanTrue
+            ], .Embedded)
+            setPropertiesOnDisplayDriver([
+                "enableDither": kCFBooleanFalse
+            ], .External)
+            return
+        }
+
         setPropertiesOnDisplayDriver([
             "enableDither": CFBooleanFromBool(!disable)
         ])
